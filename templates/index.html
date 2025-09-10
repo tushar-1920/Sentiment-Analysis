@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sentiment Analysis App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f8f9fa;
+            text-align: center;
+            padding: 30px;
+        }
+        .container {
+            width: 50%;
+            margin: auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0px 3px 10px rgba(0,0,0,0.2);
+        }
+        textarea {
+            width: 90%;
+            height: 100px;
+            margin: 10px 0;
+        }
+        button {
+            padding: 10px 20px;
+            background: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+        }
+        .positive { background: #d4edda; color: #155724; }
+        .negative { background: #f8d7da; color: #721c24; }
+        .neutral { background: #e2e3e5; color: #383d41; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Sentiment Analysis App</h2>
+        <form method="POST">
+            <textarea name="user_text" placeholder="Enter your text here..." required></textarea><br>
+            <button type="submit">Analyze</button>
+        </form>
+
+        {% if analysis %}
+            <div class="result {% if analysis.sentiment == 'Positive' %}positive
+                                {% elif analysis.sentiment == 'Negative' %}negative
+                                {% else %}neutral{% endif %}">
+                <h3>Result: {{ analysis.sentiment }}</h3>
+                <p><b>Polarity:</b> {{ analysis.polarity }}</p>
+                <p><b>Subjectivity:</b> {{ analysis.subjectivity }}</p>
+                <p><b>Text:</b> {{ analysis.text }}</p>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
